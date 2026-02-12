@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 "sjnfdsd"
-from typing import Sequence, Tuple, List
+from typing import Iterable, Sequence, Tuple, List
 
 
-def element_length(lst: List[str]) -> List[Tuple[str, int]]:
-    "klkh"
+def element_length(lst: Iterable[Sequence]) -> List[Tuple[Sequence, int]]:
+    "dfgsdfg"
     return [(i, len(i)) for i in lst]
