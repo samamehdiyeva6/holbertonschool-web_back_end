@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"dfgdfgf"
+""""This module provides a function to add two floating-point numbers."""
 
 
 def add(a: float, b: float) -> float:
-    "fdjgbdkfj"
+    """Return the sum of two floating-point numbers."""
     return a + b
