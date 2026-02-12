@@ -2,6 +2,6 @@
 "sjnfdsd"
 
 
-def floor(n: float) -> float:
+def floor(n: float) -> int:
     "dsfdsf"
     return floor(n)
