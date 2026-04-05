@@ -18,7 +18,7 @@ class Config:
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
     2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
-    3: {"name": "Spock", "locale": "fr", "timezone": "Europe/Paris"},
+    3: {"name": "Spock", "locale": "kg", "timezone": "Vulkan"},
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
 
@@ -27,10 +27,12 @@ def get_locale():
     """
     Determines the best match for supported languages
     """
-    if request.args.get('locale'):
+    if request.args.get('locale') in app.config['LANGUAGES']:
         return request.args.get('locale')
-    elif g.user is not None and g.user.get('locale') is not None:
-        return g.user.get('locale')
+    elif g.user:
+        locale = g.user.get('locale')
+        if locale in app.config['LANGUAGES']:
+            return locale
     elif request.headers.get('locale'):
         return request.headers.get('locale')
     return request.accept_languages.best_match(app.config['LANGUAGES'])
