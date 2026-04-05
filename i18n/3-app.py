@@ -11,7 +11,7 @@ class Config:
     This class is for configuring the languages
     """
     LANGUAGES = ["fr", "en"]
-    BABEL_DEFAULT_LOCALE = 'fr'
+    BABEL_DEFAULT_LOCALE = 'en'
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
