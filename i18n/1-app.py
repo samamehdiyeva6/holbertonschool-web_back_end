@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from flask import Flask, render_template
 from babel import Babel
 """Flask-Babel is an extension to Flask that adds support for internationalization (i18n)"""
