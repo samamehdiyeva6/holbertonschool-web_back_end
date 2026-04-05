@@ -4,6 +4,7 @@ This module is for Babel object instantiation
 """
 from flask import Flask, request, render_template, g
 from flask_babel import Babel
+import pytz
 
 
 class Config:
@@ -38,6 +39,24 @@ def get_locale():
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
+def get_timezone():
+    """
+    Determines the best match for supported timezones
+    """
+    try:
+        if request.args.get('timezone'):
+            pytz.timezone(request.args.get('timezone'))
+            return request.args.get('timezone')
+        elif g.user:
+            timezone = g.user.get('timezone')
+            if timezone:
+                pytz.timezone(timezone)
+                return timezone
+    except pytz.exceptions.UnknownTimeZoneError:
+        pass
+    return app.config['BABEL_DEFAULT_TIMEZONE']
+
+
 def get_user(login_as):
     """
     Returns a user dictionary or None if the ID cannot be found
@@ -51,7 +70,7 @@ def get_user(login_as):
 
 app = Flask(__name__)
 app.config.from_object(Config)
-babel = Babel(app, locale_selector=get_locale)
+babel = Babel(app, locale_selector=get_locale, timezone_selector=get_timezone)
 
 
 @app.before_request
@@ -68,7 +87,7 @@ def home():
     """
     Renders the template
     """
-    return render_template('6-index.html')
+    return render_template('7-index.html')
 
 
 if __name__ == '__main__':
