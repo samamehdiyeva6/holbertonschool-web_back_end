@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Flask-Babel is an extension to Flask that adds support for internationalization(i18n)
+Flask-Babel is an extension to Flask that adds
+support for internationalization(i18n)
 """
 from flask import Flask, render_template
 from flask_babel import Babel
