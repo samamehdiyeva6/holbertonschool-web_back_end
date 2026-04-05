@@ -17,6 +17,7 @@ def get_locale():
 babel = Babel(locale_selector=get_locale)
 babel.init_app(app)
 
+
 @app.route("/")
 def home():
     """Route that returns a template"""
