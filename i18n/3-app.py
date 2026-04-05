@@ -11,10 +11,13 @@ app = Flask(__name__)
 babel = Babel(app)
 
 
+def translate(string):
+    """Translate a string using Flask-Babel."""
+    return _(string)
+
 @app.context_processor
 def inject_globals():
-    """Inject the _ function into Jinja2 templates for translations."""
-    return dict(_=_)
+    return dict(_=translate)
 
 @app.route("/")
 def home():
