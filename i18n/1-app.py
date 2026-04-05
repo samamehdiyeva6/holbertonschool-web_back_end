@@ -16,3 +16,8 @@ class Config(object):
 
 app.config.from_object(Config)
 babel = Babel(app)
+
+@app.route("/")
+def home():
+    """Route that returns a template"""
+    return render_template('1-index.html')
