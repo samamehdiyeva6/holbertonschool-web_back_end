@@ -1,25 +1,39 @@
 #!/usr/bin/env python3
 """
-Flask-Babel is an extension to Flask that adds
+This module is for Babel object instantiation
 """
+from flask import Flask, request, render_template
+from flask_babel import Babel
 
-from flask import Flask, render_template
-from flask_babel import Babel, _
+
+class Config:
+    """
+    This class is for configuring the languages
+    """
+    LANGUAGES = ["en", "fr"]
+    BABEL_DEFAULT_LOCALE = 'en'
+    BABEL_DEFAULT_TIMEZONE = 'UTC'
+
+
+def get_locale():
+    """
+    Determines the best match for supported languages
+    """
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 app = Flask(__name__)
-babel = Babel(app)
+app.config.from_object(Config)
+babel = Babel(app, locale_selector=get_locale)
 
 
-def translate(string):
-    """Translate a string using Flask-Babel."""
-    return _(string)
-
-@app.context_processor
-def inject_globals():
-    return dict(_=translate)
-
-@app.route("/")
+@app.route('/')
 def home():
-    """Route that returns a template"""
-    return render_template('3-index.html')
+    """
+    Renders the template
+    """
+    return render_template('2-index.html')
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
