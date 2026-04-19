@@ -1,5 +1,12 @@
-def indef_range(page, page_size):
-    """Returns a list of page numbers to display in pagination."""
+#!/usr/bin/env python3
+"""
+Simple helper function
+"""
+from typing import Tuple
+
+
+def indef_range(page: int, page_size: int) -> Tuple[int, int]:
+    """Returns page numbers to display in pagination."""
     start = (page - 1) * page_size
     end = start + page_size
-    return list(range(start, end))
+    return (start, end)
