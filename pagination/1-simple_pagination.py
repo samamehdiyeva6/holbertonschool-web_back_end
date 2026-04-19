@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """
-Simple pagination
+Simple helper function
 """
+
+
 from typing import Tuple
 import csv
 import math
@@ -9,13 +11,10 @@ from typing import List
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    """
-    Takes two integer arguments and returns a tuple of
-    size two containing a start index and an end index
-    """
-    start_index = (page - 1) * page_size
-    end_index = page * page_size
-    return (start_index, end_index)
+    """Returns page numbers to display in pagination."""
+    start = (page - 1) * page_size
+    end = start + page_size
+    return (start, end)
 
 
 class Server:
@@ -38,16 +37,16 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """Returns the appropriate page of the dataset (i.e. the correct
+        list of rows).
         """
-        Takes two integer arguments and returns the
-        appropriate page of the dataset. If the input arguments are
-        out of range for the dataset, an empty list should be returned.
-        """
-        assert isinstance(page, int) and page > 0
-        assert isinstance(page_size, int) and page_size > 0
-        data = self.dataset()
+        assert type(page) == int and page > 0
+        assert type(page_size) == int and page_size > 0
+
         start, end = index_range(page, page_size)
-        try:
-            return data[start:end]
-        except IndexError:
+        dataset = self.dataset()
+
+        if start > len(dataset):
             return []
+
+        return dataset[start:end]
