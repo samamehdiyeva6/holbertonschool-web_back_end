@@ -2,10 +2,9 @@
 """
 Simple pagination
 """
-from typing import Tuple
+from typing import Tuple, Any, List
 import csv
 import math
-from typing import List
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
@@ -52,7 +51,7 @@ class Server:
         except IndexError:
             return []
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> dict[str, Any]:
         """
         Takes the same arguments (and defaults) as get_page and returns
         a dictionary containing the following key-value pairs:
