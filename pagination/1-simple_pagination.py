@@ -10,7 +10,7 @@ import math
 from typing import List
 
 
-def indef_range(page: int, page_size: int) -> Tuple[int, int]:
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """Returns page numbers to display in pagination."""
     start = (page - 1) * page_size
     end = start + page_size
@@ -43,7 +43,7 @@ class Server:
         assert type(page) == int and page > 0
         assert type(page_size) == int and page_size > 0
 
-        start, end = indef_range(page, page_size)
+        start, end = index_range(page, page_size)
         dataset = self.dataset()
 
         if start >= len(dataset):
