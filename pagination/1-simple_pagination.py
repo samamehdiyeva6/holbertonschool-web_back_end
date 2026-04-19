@@ -46,7 +46,7 @@ class Server:
         start, end = index_range(page, page_size)
         dataset = self.dataset()
 
-        if start > len(dataset):
+        try:
+            dataset[start:end]
+        except IndexError:
             return []
-
-        return dataset[start:end]
