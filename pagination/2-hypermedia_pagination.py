@@ -2,7 +2,7 @@
 """
 Simple pagination
 """
-from typing import Tuple, Any, List
+from typing import Tuple, List
 import csv
 import math
 
@@ -51,7 +51,7 @@ class Server:
         except IndexError:
             return []
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> dict[str, Any]:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
         """
         Takes the same arguments (and defaults) as get_page and returns
         a dictionary containing the following key-value pairs:
