@@ -2,7 +2,7 @@ const express = require('express');
 const fs = require('fs');
 
 const app = express();
-const DB_FILE = process.argv[2]; // Terminaldan ötürülən verilənlər bazası faylının adı (database.csv)
+const DB_FILE = process.argv[2];
 
 // Tələbə məlumatlarını asinxron oxuyub string kimi qaytaran köməkçi funksiya
 function getStudentsReport(path) {
@@ -13,7 +13,7 @@ function getStudentsReport(path) {
         return;
       }
 
-      const lines = data.split(/\r?\n/).filter(line => line.trim() !== '');
+      const lines = data.split(/\r?\n/).filter((line) => line.trim() !== '');
       if (lines.length <= 1) {
         resolve('Number of students: 0');
         return;
@@ -65,7 +65,7 @@ app.get('/students', (req, res) => {
     })
     .catch(() => {
       // Xəta baş verdikdə tələb olunan mətni qaytarırıq
-      res.send(`This is the list of our students\nCannot load the database`);
+      res.send('This is the list of our students\nCannot load the database');
     });
 });
 
