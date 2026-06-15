@@ -8,7 +8,7 @@ export default class StudentsController {
     readDatabase(dbFile)
       .then((fields) => {
         let output = 'This is the list of our students';
-        
+
         // Sahələrin adlarını əlifba sırası ilə (case-insensitive) sıralayırıq
         const sortedFields = Object.keys(fields).sort((a, b) => 
           a.toLowerCase().localeCompare(b.toLowerCase())
@@ -18,7 +18,7 @@ export default class StudentsController {
           const names = fields[field];
           output += `\nNumber of students in ${field}: ${names.length}. List: ${names.join(', ')}`;
         }
-        
+
         return response.status(200).send(output);
       })
       .catch(() => {
