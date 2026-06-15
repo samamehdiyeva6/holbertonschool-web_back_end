@@ -1,47 +1,38 @@
-import { readDatabase } from '../utils';
+import readDatabase from '../utils';
 
 export default class StudentsController {
   static getAllStudents(request, response) {
-    // Verilənlər bazası faylının adını icra zamanı argumentlərdən götürürük
     const dbFile = process.argv[2];
 
     readDatabase(dbFile)
       .then((fields) => {
         let output = 'This is the list of our students';
-
-        // Sahələrin adlarını əlifba sırası ilə (case-insensitive) sıralayırıq
-        const sortedFields = Object.keys(fields).sort((a, b) => 
+        const sortedFields = Object.keys(fields).sort((a, b) => (
           a.toLowerCase().localeCompare(b.toLowerCase())
-        );
+        ));
 
         for (const field of sortedFields) {
           const names = fields[field];
           output += `\nNumber of students in ${field}: ${names.length}. List: ${names.join(', ')}`;
         }
-
         return response.status(200).send(output);
       })
-      .catch(() => {
-        return response.status(500).send('Cannot load the database');
-      });
+      .catch(() => response.status(500).send('Cannot load the database'));
   }
 
   static getAllStudentsByMajor(request, response) {
     const dbFile = process.argv[2];
     const { major } = request.params;
 
-    // Major dəyərinin yoxlanılması
     if (major !== 'CS' && major !== 'SWE') {
       return response.status(500).send('Major parameter must be CS or SWE');
     }
 
-    readDatabase(dbFile)
+    return readDatabase(dbFile)
       .then((fields) => {
         const names = fields[major] || [];
         return response.status(200).send(`List: ${names.join(', ')}`);
       })
-      .catch(() => {
-        return response.status(500).send('Cannot load the database');
-      });
+      .catch(() => response.status(500).send('Cannot load the database'));
   }
 }
