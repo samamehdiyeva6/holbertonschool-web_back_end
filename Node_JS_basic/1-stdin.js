@@ -5,13 +5,15 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-console.log("Welcome to Holberton School, what is your name?");
+// console.log yerinə standart çıxışa yazırıq ki, testin gözlədiyi format pozulmasın
+process.stdout.write("Welcome to Holberton School, what is your name?\n");
 
 rl.on('line', (input) => {
-    console.log(`Your name is: ${input}`);
+    // Giriş mətninin sonundakı boşluqları və gizli \r xarakterlərini təmizləmək üçün .trim() istifadə edirik,
+    // sonra isə testin tələb etdiyi kimi sonuna \r əlavə edirik.
+    process.stdout.write(`Your name is: ${input.trim()}\r`);
 });
 
 rl.on('close', () => {
-    console.log("This important software is now closing");
+    process.stdout.write("This important software is now closing\n");
 });
-
