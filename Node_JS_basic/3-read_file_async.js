@@ -11,7 +11,7 @@ function countStudents(path) {
       }
 
       // Sətirlərə bölürük və boş sətirləri təmizləyirik
-      const lines = data.split(/\r?\n/).filter(line => line.trim() !== '');
+      const lines = data.split(/\r?\n/).filter((line) => line.trim() !== '');
 
       // Əgər faylda tələbə yoxdursa (boşdursa və ya yalnız başlıq sətri varsa)
       if (lines.length <= 1) {
